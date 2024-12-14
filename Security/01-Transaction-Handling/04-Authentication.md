@@ -75,3 +75,22 @@ jwt.verify(token, 'key', (err, decoded) => {
     }
 });
 ```
+## Access Token/Key
+Using an access token/key for someone to use your payment system is an ideal approach. Here, you generate different keys to grant access. This is a great approach for security. You can might aswell add sessions to maximize safety. Session based access token changes should be based on your opinion, on how it should work. Remember that try to make it look best for UI, think about yourself, how would you like to use it. Also ensure that acccess token generator doesn't generate the same tokens twice or more times.
+```js
+const crypto = require('crypto');
+let generatedTokens = [];
+
+// Generate Access Token
+function gat() {
+    const token = crypto.randomBytes(64).toString('hex');
+    if(generatedTokens.includes(token)) {
+        return gat();
+    };
+
+    generatedTokens.push(tokens);
+    return token;
+}
+
+const newToken = gat();
+```

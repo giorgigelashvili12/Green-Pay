@@ -17,3 +17,28 @@ Both the client and the server are now using HTTPS for their communication. Once
 
 ## Why is SSL/TLS Decryption Important for Security?
 SSL/TLS encryption is great for security because it increases confidentiality and integrity of data communication. Attackers also use enccryption to hide malicious payloads, effective decryptions is necessary for inspection tools.
+
+## SSL/TLS Certification
+Can be one of the easiest ways to get a certificate is to enter the following line and enter all the fields to gain access:
+```bash
+$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+```
+```js
+const fs = require('fs');
+const https = require('https');
+const express = require('express');
+
+const app = express();
+
+const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem'),
+};
+
+app.get('/', (req, res) => {
+    res.send('Running');
+});
+
+https.createServer(options, app) 
+    .listen(3000);
+```

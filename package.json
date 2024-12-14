@@ -1,0 +1,20 @@
+{
+  "name": "green-pay",
+  "version": "1.0.0",
+  "description": "Introduce you to Green Pay! This might be the biggest project that I am planning to start yet, which has a lot of critical requirements to deploy, which will alone take about a year to learn and 1+ years to create assets, analyse, test and improve. Basically Green Pay is a comprehensive payment system, that will be built from zero to hero. This project will include from mastering basics steps of MERN stack to advanced security and payment methods & validation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giorgigelashvili12/Green-Pay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/giorgigelashvili12/Green-Pay/issues"
+  },
+  "homepage": "https://github.com/giorgigelashvili12/Green-Pay#readme"
+}
