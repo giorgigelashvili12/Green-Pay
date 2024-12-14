@@ -36,3 +36,34 @@ PCI compliance is a huge priority for this project, because handling card data d
 # Firewalls and Network Security
 Firewalls are a next general topic to talk about. They are crucial for protection the boundaries of your network, especially when dealing with sensetive information like credit card informations. Firewall is a security system that monitors and controls incoming and outgoing network traffic based on security rules. It's basically a gatekeeper between your internal and external networks. External firewall protects your network from external threats, and internal one protects sensetive internal sources from being accessed by unauthorized internal users or systems. There are two types of firewalls: Hardware firewalls are physical devices that sit between your network and the internet. Software firewalls are software programs installed on individual servers.
 ## Firewall Setup
+Firewalls usually:
+* Prevent Unauthorized Access
+* Block Malicious Traffic
+* Restrict Access to Critical Resources
+When setting up and implementing firewall in your app, first you have to learn and understand different firewalls and use them based on your application goals:
+* Host-Based Firewalls (Protect server where Node app runs)
+* Network Firewalls (Secure the network perimeter or isolate the parts of you app structure)
+* Web App Firewalls (WAF - Specifically designed to filter HTTP requests, useful for protecting OWASP 10 vulnerabilities)
+### Node.js Configurations
+#### IP Whitelisting & Blacklisting
+You can restrict access to your app by controlling IPs that can send requests.
+```javascript
+const express = require('express');
+const app = express();
+
+const allowedIPs = ['123.123.123.123', '111.111.111.111'];
+// trusted IPs
+app.use((req, res, next) => {
+    const clientIP = req.ip || req.connection.remoteAddress;
+    if(!allowedIPs.includes(clientIP)) {
+        return res.status(403).send('Not Found');
+    };
+    next();
+});
+app.get('/', (req, res) => {
+    res.send('Server Running');
+});
+
+app.listen(3000);
+```
+*** Explanation: *** App is created using express, then a list is defined containing trusted IPs for future usage. Then moving on, with app.use() method, function is defined containing main and common parameters like request (req), response (res) and next (move on to next part of the application). Within the anonymous function, another variable is defined, __ clientIP __ which contains properties: __ req.i: __ retrieves IP address of the client making request. Ensure trust proxy is configures in Express, otherwise, this might not work as expected; Moving on, there's an if statement, which states, that if an array of trusted IPs include the extracted clientIP (Reminder that in this block, there's ** ! ** operator included which claims this statement as false), then block access.
